@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TitulosController {
 	
-	private final String INDEX = "index";
+	private static final String INDEX = "index";
 	
 	@RequestMapping("/")
 	public String index() {
