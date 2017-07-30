@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "entidade")
 public class Entidade {
@@ -36,6 +38,7 @@ public class Entidade {
 		this.codigo = codigo;
 	}
 
+	@NotBlank
 	@Column(length = 60)
 	public String getNome() {
 		return nome;
@@ -45,6 +48,7 @@ public class Entidade {
 		this.nome = nome;
 	}
 
+	//@NotBlank
 	@Column(name = "cpf_cnpj", length = 60)
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
@@ -54,6 +58,7 @@ public class Entidade {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
+	//@NotBlank
 	@Column(length = 80)
 	public String getEndereco() {
 		return endereco;
@@ -90,6 +95,7 @@ public class Entidade {
 		this.estado = estado;
 	}
 
+	//@NotBlank
 	@Column(length = 20)
 	public String getTelefone() {
 		return telefone;
@@ -99,6 +105,7 @@ public class Entidade {
 		this.telefone = telefone;
 	}
 
+	//@NotBlank
 	@Column(length = 100)
 	public String getEmail() {
 		return email;

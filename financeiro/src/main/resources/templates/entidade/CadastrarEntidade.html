@@ -20,8 +20,9 @@
 									
 									<div class="row">
 										<div class="input-field col m6 s12">
-											<input id="nome" type="text" class="validate" name="nome"/>
-											<label for="nome">Nome</label>
+											<input id="nome" type="text" class="validate" th:field="*{nome}"
+												th:classappend="${#fields.hasErrors('nome')} ? invalid"/>
+											<label for="nome" data-error="O nome é obrigatório!">Nome</label>
 										</div>
 										<div class="input-field col m6 s12">
 											<input id="cpf_cnpj" type="text" class="validate" name="cpfOuCnpj"/>
