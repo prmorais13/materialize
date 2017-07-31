@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="www.ultrag.net.nz/thymeleaf/layout"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="/layout/LayoutPadrao">
 
 <section layout:fragment="conteudo">
@@ -18,6 +18,8 @@
 								<form class="col s12" method="post" th:action="@{/entidades/novo}"
 									th:object="${entidade}">
 									
+									<input type="hidden" th:field="*{codigo}" />
+									
 									<div class="row">
 										<div class="input-field col m6 s12">
 											<input id="nome" type="text" class="validate" th:field="*{nome}"
@@ -25,21 +27,22 @@
 											<label for="nome" data-error="O nome é obrigatório!">Nome</label>
 										</div>
 										<div class="input-field col m6 s12">
-											<input id="cpf_cnpj" type="text" class="validate" name="cpfOuCnpj"/>
-											<label for="cpf_cnpj">CPF/CNPJ</label>
+											<input id="cpf_cnpj" type="text" class="validate" th:field="*{cpfOuCnpj}"
+												th:classappend="${#fields.hasErrors('cpfOuCnpj')} ? invalid"/>
+											<label for="cpf_cnpj" data-error="CPF/CNPJ inválido">CPF/CNPJ</label>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="input-field col m6 s12">
-											<select id="estado" class="validade" name="estado">
+											<select id="estado" class="validade" th:field="*{estado}">
 												<option value="" disabled="disabled" selected="selected">Selecione o Estado</option>
 												<option value="RN">Rio Grande do Norte</option>
 												<option value="PB">Paraíba</option>
 											</select>
 										</div>
 										<div class="input-field col m6 s12">
-											<select id="cidade" class="validade" name="cidade">
+											<select id="cidade" class="validade" th:field="*{cidade}">
 												<option value="" disabled="disabled" selected="selected">Selecione a Cidade</option>
 												<option value="Natal">Natal</option>
 												<option value="João Pessoa">João Pessoa</option>
@@ -49,23 +52,26 @@
 									
 									<div class="row">
 										<div class="input-field col m6 s12">
-											<input id="endereco" type="text" class="validate" name="endereco"/>
-											<label for="endereco">Endereço</label>
+											<input id="endereco" type="text" class="validate" th:field="*{endereco}"
+												th:classappend="${#fields.hasErrors('endereco')} ? invalid"/>
+											<label for="endereco" data-error="O endereço é obrigatório!">Endereço</label>
 										</div>
 										<div class="input-field col m6 s12">
-											<input id="bairro" type="text" class="validate" name="bairro"/>
+											<input id="bairro" type="text" class="validate" th:field="*{bairro}"/>
 											<label for="bairro">Bairro</label>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="input-field col m6 s12">
-											<input id="telefone" type="text" class="validate" name="telefone"/>
-											<label for="telefone">Telefone</label>
+											<input id="telefone" type="text" class="validate" th:field="*{telefone}"
+												th:classappend="${#fields.hasErrors('telefone')} ? invalid"/>
+											<label for="telefone" data-error="O telefone é obrigatório!">Telefone</label>
 										</div>
 										<div class="input-field col m6 s12">
-											<input id="email" type="email" class="validate" name="email"/>
-											<label for="email" data-error="Não é um e-mail válido!" data-success="Email correto.">
+											<input id="email" type="email" class="validate" th:field="*{email}"
+												th:classappend="${#fields.hasErrors('email')} ? invalid"/>
+											<label for="email" data-error="E-mail inválido!" data-success="Email correto.">
 												E-mail
 											</label>
 										</div>

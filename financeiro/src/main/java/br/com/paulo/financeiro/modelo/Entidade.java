@@ -48,7 +48,7 @@ public class Entidade {
 		this.nome = nome;
 	}
 
-	//@NotBlank
+	@NotBlank
 	@Column(name = "cpf_cnpj", length = 60)
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
@@ -58,7 +58,7 @@ public class Entidade {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	//@NotBlank
+	@NotBlank
 	@Column(length = 80)
 	public String getEndereco() {
 		return endereco;
@@ -95,7 +95,7 @@ public class Entidade {
 		this.estado = estado;
 	}
 
-	//@NotBlank
+	@NotBlank
 	@Column(length = 20)
 	public String getTelefone() {
 		return telefone;
@@ -105,7 +105,7 @@ public class Entidade {
 		this.telefone = telefone;
 	}
 
-	//@NotBlank
+	@NotBlank
 	@Column(length = 100)
 	public String getEmail() {
 		return email;

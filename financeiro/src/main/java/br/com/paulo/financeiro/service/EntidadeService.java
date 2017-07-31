@@ -1,5 +1,7 @@
 package br.com.paulo.financeiro.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,10 @@ public class EntidadeService {
 	
 	public void salvar(Entidade entidade) {
 		this.entidades.save(entidade);
+	}
+	
+	public List<Entidade> buscar(String nome){
+		//return this.entidades.findByNomeContainingIgnoreCase(nome);
+		return this.entidades.porNome(nome);
 	}
 }
