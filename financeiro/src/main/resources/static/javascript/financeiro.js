@@ -4,7 +4,7 @@ Financeiro.DialogoDeRemocao = (function () {
 
     function DialogoDeRemocao() {
         this.modal = $('#modal-remover-entidade');
-        this.botaoRemover = $('.js-remover-entidade-btn');
+        this.botaoRemover = $('.modal-trigger');
     }
 
     DialogoDeRemocao.prototype.iniciar = function () {

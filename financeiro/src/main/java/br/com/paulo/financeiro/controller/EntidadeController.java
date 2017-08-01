@@ -59,4 +59,10 @@ private ModelAndView mv;
 		this.mv.addObject(entidade);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
+	public String remover(@PathVariable Long codigo) {
+		this.entidadeService.excluir(codigo);
+		return "redirect:/entidades";
+	}
 }

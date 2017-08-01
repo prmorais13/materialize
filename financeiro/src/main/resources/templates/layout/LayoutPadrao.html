@@ -15,13 +15,14 @@
 </head>
 
 <body>
-  <header layout:include="/fragments/cabecalho"></header>
+  <div th:insert="/fragments/cabecalho :: header"></div>
+ 
   
-  <section layout:fragment="conteudo">
+  <section layout:fragment ="conteudo">
   	
   </section>
   
-  <div layout:include="/fragments/footer">
+  <div th:insert="/fragments/footer :: footer">
   
   </div>
 
@@ -29,6 +30,6 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script th:src="@{/vendor/js/materialize.js}"></script>
   <script th:src="@{/vendor/js/init.js}"></script>
-  <th:block layout:fragment="javascript-extra"></th:block>
+  <th:block layout:fragment="javascript-extra"/>
   </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="/layout/LayoutPadrao">
+	layout:decorate="/layout/LayoutPadrao">
 
 <head>
 <title>Pesquisa de entidades</title>
@@ -94,7 +94,9 @@
 	        </div>
 	        <div class="modal-footer">
 	            <form th:attr="data-url-remover=@{/entidades}" method="post">
-	
+					
+					<input type="hidden" name="_method" value="DELETE" />
+					
 	                <input type="hidden" name="_method" value="DELETE"/>
 	
 	                <button type="submit"

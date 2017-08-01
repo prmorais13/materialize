@@ -22,4 +22,8 @@ public class EntidadeService {
 		//return this.entidades.findByNomeContainingIgnoreCase(nome);
 		return this.entidades.porNome(nome);
 	}
+	
+	public void excluir(Long codigo) {
+		this.entidades.delete(codigo);
+	}
 }
