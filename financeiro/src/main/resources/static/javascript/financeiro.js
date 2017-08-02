@@ -5,10 +5,12 @@ Financeiro.DialogoDeRemocao = (function () {
     function DialogoDeRemocao() {
         this.modal = $('#modal-remover-entidade');
         this.botaoRemover = $('.modal-trigger');
+        this.alertInfo = $('#info');
     }
 
     DialogoDeRemocao.prototype.iniciar = function () {
       this.botaoRemover.on('click', onModalShow.bind(this));
+      this.alertInfo.on('click', onDoubleClickInfo);
     };
 
     function onModalShow(evento){
@@ -28,7 +30,10 @@ Financeiro.DialogoDeRemocao = (function () {
         this.modal.find('.modal-content span').
         html('Tem certeza que deseja remover <strong> ' + nome + '</strong> ?');
     }
-
+    
+    function onDoubleClickInfo(evento) {
+    	$(this).remove();
+    }
 
     return DialogoDeRemocao;
 

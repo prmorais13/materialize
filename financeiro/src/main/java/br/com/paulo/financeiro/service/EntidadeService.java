@@ -3,6 +3,7 @@ package br.com.paulo.financeiro.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.paulo.financeiro.modelo.Entidade;
@@ -18,9 +19,9 @@ public class EntidadeService {
 		this.entidades.save(entidade);
 	}
 	
-	public List<Entidade> buscar(String nome){
+	public List<Entidade> porNome(String nome, Pageable pageable){
 		//return this.entidades.findByNomeContainingIgnoreCase(nome);
-		return this.entidades.porNome(nome);
+		return this.entidades.porNome(nome, pageable);
 	}
 	
 	public void excluir(Long codigo) {

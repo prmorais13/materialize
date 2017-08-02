@@ -1,16 +1,23 @@
 package br.com.paulo.financeiro.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.paulo.financeiro.controller.page.PageWrapper;
 import br.com.paulo.financeiro.modelo.Entidade;
+import br.com.paulo.financeiro.repository.Entidades;
 import br.com.paulo.financeiro.service.EntidadeService;
 
 @Controller
@@ -22,6 +29,9 @@ private static final String INDEX = "entidade/CadastrarEntidade";
 @Autowired
 private EntidadeService entidadeService;
 
+@Autowired
+private Entidades entidades;
+
 private ModelAndView mv;
 	
 	@RequestMapping(value = "/novo")
@@ -30,26 +40,33 @@ private ModelAndView mv;
 	}
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public String salvar(@Valid Entidade entidade, BindingResult result){
+	public String salvar(@Valid Entidade entidade, BindingResult result, RedirectAttributes attributes){
 		
 		if(result.hasErrors()) {
 			return this.novo(entidade);
 		}
 		
 		this.entidadeService.salvar(entidade);
+		attributes.addFlashAttribute("mensagem", "Entidade " + entidade.getNome() + " salva com sucesso.");
 		return "redirect:/entidades/novo";
 	}
 	
 	@RequestMapping
 	/*public String pesquisar(Entidade entidade, Model model) {
 		String nome = entidade.getNome() == null ? "%" : entidade.getNome();
-		model.addAttribute("entidades", this.entidadeService.buscar(nome));
+		model.addAttribute("entidades", this.entidadeService.porNome(nome));
 		return "entidade/PesquisarEntidade";
 	}*/
 	
-	public ModelAndView pesquisar(Entidade entidade) {
+	public ModelAndView pesquisar(Entidade entidade, @PageableDefault(size = 6) Pageable pageable,
+			HttpServletRequest httpServletRequest) {
+		
 		this.mv = new ModelAndView("entidade/PesquisarEntidade");
-		this.mv.addObject("entidades", this.entidadeService.buscar(entidade.getNome()));
+		
+		PageWrapper<Entidade> paginaWrapper = 
+				new PageWrapper<>(entidades.porNome(entidade.getNome(), pageable), httpServletRequest);
+		
+		this.mv.addObject("pagina", paginaWrapper);
 		return this.mv;
 	}
 	

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div id="info" class="alert card-panel deep-purple darken-4 z-depth-4 white-text" th:text="${mensagem}"
+	th:if="${!#strings.isEmpty(mensagem)}">
+	Success
+</div>
+
+</html>
