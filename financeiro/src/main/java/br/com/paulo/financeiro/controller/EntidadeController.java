@@ -1,7 +1,6 @@
 package br.com.paulo.financeiro.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.paulo.financeiro.controller.page.PageWrapper;
 import br.com.paulo.financeiro.modelo.Entidade;
-import br.com.paulo.financeiro.repository.Entidades;
 import br.com.paulo.financeiro.service.EntidadeService;
 
 @Controller
@@ -28,9 +26,6 @@ private static final String INDEX = "entidade/CadastrarEntidade";
 
 @Autowired
 private EntidadeService entidadeService;
-
-@Autowired
-private Entidades entidades;
 
 private ModelAndView mv;
 	
@@ -58,13 +53,14 @@ private ModelAndView mv;
 		return "entidade/PesquisarEntidade";
 	}*/
 	
-	public ModelAndView pesquisar(Entidade entidade, @PageableDefault(size = 6) Pageable pageable,
+	public ModelAndView pesquisar(Entidade entidade, @PageableDefault(size = 3) Pageable pageable,
 			HttpServletRequest httpServletRequest) {
+		
 		
 		this.mv = new ModelAndView("entidade/PesquisarEntidade");
 		
 		PageWrapper<Entidade> paginaWrapper = 
-				new PageWrapper<>(entidades.porNome(entidade.getNome(), pageable), httpServletRequest);
+				new PageWrapper<>(this.entidadeService.porNome(entidade.getNome(), pageable), httpServletRequest);
 		
 		this.mv.addObject("pagina", paginaWrapper);
 		return this.mv;

@@ -47,7 +47,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="entidade: ${entidades}">
+										<tr th:each="entidade: ${pagina.conteudo}">
 											<td th:text="${entidade.codigo}"></td>
 											<td th:text="${entidade.nome}"></td>
 											<td th:text="${entidade.cpfOuCnpj}"></td>
@@ -75,13 +75,15 @@
 											</td>
 										</tr>
 										<tr>
-											<td colspan="9" th:if="${#lists.isEmpty(entidades)}">Nenhuma entidade encontrada!</td>
+											<td colspan="9" th:if="${pagina.vazia}">Nenhuma entidade encontrada!</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
+					
+					<div th:insert="/fragments/paginacao :: Pagination (${pagina})"></div>
 				</div>					
 			</div>
 		</div>
