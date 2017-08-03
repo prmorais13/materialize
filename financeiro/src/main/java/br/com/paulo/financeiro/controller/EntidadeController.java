@@ -8,9 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,12 +31,14 @@ private EntidadeService entidadeService;
 
 private ModelAndView mv;
 	
+	@GetMapping("/novo")
 	@RequestMapping(value = "/novo")
 	public String novo(Entidade entidade) {
 		return INDEX;
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
+	@PostMapping("/novo")
+	//@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public String salvar(@Valid Entidade entidade, BindingResult result, RedirectAttributes attributes){
 		
 		if(result.hasErrors()) {
@@ -42,11 +46,12 @@ private ModelAndView mv;
 		}
 		
 		this.entidadeService.salvar(entidade);
-		attributes.addFlashAttribute("mensagem", "Entidade " + entidade.getNome() + " salva com sucesso.");
+		attributes.addFlashAttribute("mensagem", "Entidade <strong> " + entidade.getNome() + "</strong> salva com sucesso.");
 		return "redirect:/entidades/novo";
 	}
 	
-	@RequestMapping
+	@GetMapping
+	//@RequestMapping
 	/*public String pesquisar(Entidade entidade, Model model) {
 		String nome = entidade.getNome() == null ? "%" : entidade.getNome();
 		model.addAttribute("entidades", this.entidadeService.porNome(nome));
@@ -66,14 +71,16 @@ private ModelAndView mv;
 		return this.mv;
 	}
 	
-	@RequestMapping(value = "/{codigo}")
+	@GetMapping("/{codigo}")
+	//@RequestMapping(value = "/{codigo}")
 	public ModelAndView editar(@PathVariable("codigo") Entidade entidade) {
 		this.mv = new ModelAndView(INDEX);
 		this.mv.addObject(entidade);
 		return mv;
 	}
 	
-	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{codigo}")
+	//@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
 	public String remover(@PathVariable Long codigo) {
 		this.entidadeService.excluir(codigo);
 		return "redirect:/entidades";
